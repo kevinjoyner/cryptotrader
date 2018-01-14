@@ -23,7 +23,9 @@ class EurSellPrices:
         with urllib.request.urlopen(req) as response:
             price = json.loads(response.read().decode('utf-8'))
 
+        now = datetime.datetime.now()
+        datehour = datetime.datetime(now.year, now.month, now.day, now.hour, 0, 0, 0)
         epoch = datetime.datetime.utcfromtimestamp(0)
-        price['time'] = round((datetime.datetime.now() - epoch).total_seconds() * 1000000)
+        price['time'] = round((datehour - epoch).total_seconds() * 1000000)
 
         return price

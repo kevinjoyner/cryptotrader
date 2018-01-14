@@ -15,7 +15,7 @@ class LogPrices:
         data = []
         for item in eth_binance_symbols:
             data.extend([{
-                "hour_nano": item["EthEurTime"],
+                "hour_micro": item["EthEurTime"],
                 "symbol": item["symbol"][:-3],
                 "EURbidPrice": item["EURbidPrice"]
             }])
