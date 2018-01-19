@@ -2,6 +2,7 @@
 
 """ For querying tracked prices and calculating variances etc. """
 
+import datetime
 import pandas as pd
 from pymongo import MongoClient
 
@@ -10,7 +11,7 @@ DB = CLIENT.cryptotracker
 
 VALUES = []
 HOURS = []
-for cc in db.eur_prices.find():
+for cc in DB.eur_prices.find():
     HOURS.append(datetime.datetime.fromtimestamp(cc['hour_micro']/1000000))
     VALUES.append({'symbol': cc['symbol'], 'EURbidPrice': cc['EURbidPrice']})
 
