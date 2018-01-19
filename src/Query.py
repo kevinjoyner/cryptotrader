@@ -16,3 +16,5 @@ for cc in db.eur_prices.find():
 
 DF = pd.DataFrame(VALUES, index=pd.DatetimeIndex(HOURS))
 DF = DF.pivot(index=None, VALUES='EURbidPrice', columns='symbol')
+
+print(DF)
