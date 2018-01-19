@@ -16,6 +16,6 @@ for cc in DB.eur_prices.find():
     VALUES.append({'symbol': cc['symbol'], 'EURbidPrice': cc['EURbidPrice']})
 
 DF = pd.DataFrame(VALUES, index=pd.DatetimeIndex(HOURS))
-DF = DF.pivot(index=None, VALUES='EURbidPrice', columns='symbol')
+DF = DF.pivot(index=None, values='EURbidPrice', columns='symbol')
 
 print(DF)
