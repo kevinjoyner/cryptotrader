@@ -12,14 +12,14 @@ from Report import Reports
 NOW = datetime.datetime.now()
 DATEHOUR = datetime.datetime(NOW.year, NOW.month, NOW.day, NOW.hour, 0, 0, 0)
 
-# EURSELLPRICES = EurSellPrices()
-# ETHEURSELLPRICE = EURSELLPRICES.fetch_etheur(DATEHOUR)
+EURSELLPRICES = EurSellPrices()
+ETHEURSELLPRICE = EURSELLPRICES.fetch_etheur(DATEHOUR)
 
-# ETHBIDPRICES = EthBidPrices()
-# ETHBINANCESYMBOLS = ETHBIDPRICES.fetch_eth(ETHEURSELLPRICE)
+ETHBIDPRICES = EthBidPrices()
+ETHBINANCESYMBOLS = ETHBIDPRICES.fetch_eth(ETHEURSELLPRICE)
 
-# LOGPRICES = LogPrices()
-# LOGPRICES.eur_bid_prices(ETHBINANCESYMBOLS)
+LOGPRICES = LogPrices()
+LOGPRICES.eur_bid_prices(ETHBINANCESYMBOLS)
 
 MONGOQUERIES = MongoQueries()
 PRICESDF = MONGOQUERIES.hourly_prices_per_symbol_df()
