@@ -7,10 +7,11 @@ import pandas as pd
 import numpy as np
 
 class Reports:
-    """ . """
+    """ For calculating and reporting stats """
 
     def stats_report(self, datehour, prices_df):
-        """ . """
+        """ Returns dataframe indexed on currency Symbol giving recent standard deviation and
+            longer term deltas for each """
 
         values = []
         seven_days_ago = datehour - timedelta(hours=((6*24)-1))
