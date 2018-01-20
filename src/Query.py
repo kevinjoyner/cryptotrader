@@ -24,5 +24,6 @@ class MongoQueries:
 
         dataframe = pd.DataFrame(values, index=pd.DatetimeIndex(hours))
         dataframe = dataframe.pivot(index=None, values='EURbidPrice', columns='symbol')
+        dataframe = dataframe.apply(pd.to_numeric, errors='ignore')
 
         return dataframe
