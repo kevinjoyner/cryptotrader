@@ -13,7 +13,7 @@ class Calculators:
         """ . """
 
         values = []
-        seven_days_ago = datehour - timedelta(days=7)
+        seven_days_ago = datehour - timedelta(hours=((6*24)-1))
         nineteen_hours_ago = datehour - timedelta(hours=19)
         hour_ago = datehour - timedelta(hours=1)
 
