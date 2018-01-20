@@ -23,8 +23,8 @@ class Calculators:
             value['recent_std_dev'] = np.std(prices_df[symbol][nineteen_hours_ago:hour_ago].apply(float))
 
             value['seven_day_delta'] = \
-            (prices_df[symbol][hour_ago].apply(float) - prices_df[symbol][seven_days_ago].apply(float)) \
-            / prices_df[symbol][seven_days_ago].apply(float)
+            (float(prices_df[symbol][hour_ago]) - float(prices_df[symbol][seven_days_ago])) \
+            / float(prices_df[symbol][seven_days_ago])
 
             values.append(value)
 
