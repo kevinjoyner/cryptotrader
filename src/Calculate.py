@@ -20,14 +20,12 @@ class Calculators:
         for symbol in prices_df.columns:
             value = {}
             value['symbol'] = symbol
-            value['recent_std_dev'] = np.std(prices_df[symbol][nineteen_hours_ago:hour_ago])
+            value['recent_std_dev'] = np.std(prices_df[symbol][nineteen_hours_ago:hour_ago].apply(float))
 
             value['seven_day_delta'] = \
-            (prices_df[symbol][hour_ago] - prices_df[symbol][seven_days_ago]) \
-            / prices_df[symbol][seven_days_ago]
+            (prices_df[symbol][hour_ago].apply(float) - prices_df[symbol][seven_days_ago].apply(float)) \
+            / prices_df[symbol][seven_days_ago].apply(float)
 
             values.append(value)
 
         return pd.DataFrame(values)
-
-        # for symbol in values:
