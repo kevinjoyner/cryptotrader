@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 
-""" For calculating variances etc. """
+""" For calculating and reporting stats """
 
 from datetime import timedelta
 import pandas as pd
 import numpy as np
 
-class Calculators:
+class Reports:
     """ . """
 
     def stats_report(self, datehour, prices_df):
@@ -29,4 +29,4 @@ class Calculators:
 
                 values.append(value)
 
-        return pd.DataFrame(values)
+        return pd.DataFrame(values).set_index('symbol')
