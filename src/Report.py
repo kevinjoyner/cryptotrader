@@ -30,4 +30,6 @@ class Reports:
 
                 values.append(value)
 
-        return = pd.DataFrame(values).set_index('symbol').apply(pd.to_numeric, errors='ignore')
+        dataframe = pd.DataFrame(values).set_index('symbol')
+        dataframe = dataframe.apply(pd.to_numeric, errors='ignore')
+        return dataframe
