@@ -33,3 +33,8 @@ class Reports:
         dataframe = pd.DataFrame(values).set_index('symbol')
         dataframe = dataframe.apply(pd.to_numeric, errors='ignore')
         return dataframe
+
+
+    def to_csv(self, data_frame, file_name):
+        data_frame.to_csv(file_name, encoding='utf-8')
+        return file_name+' written as CSV.'
