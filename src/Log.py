@@ -31,9 +31,9 @@ class PostgresLogging:
     def prices_pivot(self, prices_df):
         """ Adds the Prices Pivot dataframe to Postgresql database """
 
-        prices_df.reset_index(level=['index'], inplace=True)
-        prices_df['index'] = prices_df['index'].dt.strftime('%Y%m%d%H')
-        prices_df.rename({'index':'date_hour', 'EURbidPrice':'eurbidprice'}, 'columns')
+        prices_df['date_hour'] = prices_df.index.dt.strftime('%Y%m%d%H')
+        prices_df['eurbidprice'] = prices_df['EURbidPrice']
+        prices_df.drop(['EURbidPrice'], axis=1)
         
         with open('../creds/pg_creds.json') as json_data:
             d = json.load(json_data)
@@ -44,6 +44,6 @@ class PostgresLogging:
         
         engine = create_engine('postgresql://' + user + ':' + password + '@localhost:5432/cryptotracker')
         engine.execute('TRUNCATE eur_prices RESTART IDENTITY;')
-        prices_df.to_sql('eur_prices', engine, if_exists='append')
+        prices_df.to_sql('eur_prices', engine, if_exists='append', index=False)
 
         return
