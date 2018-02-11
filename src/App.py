@@ -5,24 +5,20 @@
 import datetime
 from CoinbasePrices import EurSellPrices
 from BinancePrices import EthBidPrices
-from MongoLog import LogPrices
+from Log import LogPrices
+from Log import PostgresLogging
 from Query import MongoQueries
 from Report import Reports
 
+   
 NOW = datetime.datetime.now()
 DATEHOUR = datetime.datetime(NOW.year, NOW.month, NOW.day, NOW.hour, 0, 0, 0)
 
-EURSELLPRICES = EurSellPrices()
-ETHEURSELLPRICE = EURSELLPRICES.fetch_etheur(DATEHOUR)
+ETHEURSELLPRICE = EurSellPrices().fetch_etheur(DATEHOUR)
+ETHBINANCESYMBOLS = EthBidPrices().fetch_eth(ETHEURSELLPRICE)
 
-ETHBIDPRICES = EthBidPrices()
-ETHBINANCESYMBOLS = ETHBIDPRICES.fetch_eth(ETHEURSELLPRICE)
+LogPrices().eur_bid_prices(ETHBINANCESYMBOLS)
 
-LOGPRICES = LogPrices()
-LOGPRICES.eur_bid_prices(ETHBINANCESYMBOLS)
-
-MONGOQUERIES = MongoQueries()
-PRICESDF = MONGOQUERIES.hourly_prices_per_symbol_df()
-
-REPORTS = Reports()
-STATSREPORT = REPORTS.stats_report(DATEHOUR, PRICESDF)
+# PRICESDF = MongoQueries().hourly_prices_per_symbol_df()
+# PostgresLogging().prices_pivot(PRICESDF)
+# STATSREPORT = Reports().stats_report(DATEHOUR, PRICESDF)
