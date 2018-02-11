@@ -34,7 +34,7 @@ class PostgresLogging:
         prices_df['date_hour'] = prices_df.index
         prices_df['date_hour'] = prices_df['date_hour'].dt.strftime('%Y%m%d%H')
         prices_df['eurbidprice'] = prices_df['EURbidPrice']
-        prices_df.drop(['EURbidPrice'], axis=1)
+        prices_df.drop(['EURbidPrice'], axis=1, inplace = True)
         
         with open('../creds/pg_creds.json') as json_data:
             d = json.load(json_data)
