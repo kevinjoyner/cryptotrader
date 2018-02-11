@@ -31,7 +31,8 @@ class PostgresLogging:
     def prices_pivot(self, prices_df):
         """ Adds the Prices Pivot dataframe to Postgresql database """
 
-        prices_df['date_hour'] = prices_df.index.dt.strftime('%Y%m%d%H')
+        prices_df['date_hour'] = prices_df.index
+        prices_df['date_hour'] = prices_df['date_hour'].dt.strftime('%Y%m%d%H')
         prices_df['eurbidprice'] = prices_df['EURbidPrice']
         prices_df.drop(['EURbidPrice'], axis=1)
         
