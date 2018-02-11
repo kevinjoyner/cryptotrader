@@ -32,7 +32,7 @@ class PostgresLogging:
         """ Adds the Prices Pivot dataframe to Postgresql database """
 
         prices_df.reset_index(level=['index'], inplace=True)
-        prices_df['index'] = all_data['index'].dt.strftime('%Y%m%d%H')
+        prices_df['index'] = prices_df['index'].dt.strftime('%Y%m%d%H')
         prices_df.rename({'index':'date_hour', 'EURbidPrice':'eurbidprice'}, axis='columns')
         
         with open('../creds/pg_creds.json') as json_data:
