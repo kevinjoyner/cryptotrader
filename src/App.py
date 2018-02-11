@@ -6,8 +6,8 @@ import datetime
 from CoinbasePrices import EurSellPrices
 from BinancePrices import EthBidPrices
 from Log import LogPrices
-from Log import PostgresLogging
 from Query import MongoQueries
+from Log import PostgresLogging
 from Report import Reports
 
    

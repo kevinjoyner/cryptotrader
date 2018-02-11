@@ -38,8 +38,8 @@ class PostgresLogging:
         user = d[0]['user']
         password = d[0]['password']
         
-        engine_string = 'postgresql://' + user + ':' + password + '@localhost:5432/cryptotracker'
-        engine = create_engine(engine_string)
-        prices_df.to_sql('eur_prices', engine)
+        engine = create_engine('postgresql://' + user + ':' + password + '@localhost:5432/cryptotracker')
+        engine.execute('TRUNCATE eur_prices RESTART IDENTITY;')
+        prices_df.to_sql('eur_prices', engine, if_exists='append')
 
         return
