@@ -33,7 +33,7 @@ class PostgresLogging:
 
         prices_df.reset_index(level=['index'], inplace=True)
         prices_df['index'] = prices_df['index'].dt.strftime('%Y%m%d%H')
-        prices_df.rename(columns={'index':'date_hour', 'EURbidPrice':'eurbidprice'}, axis='columns')
+        prices_df.rename({'index':'date_hour', 'EURbidPrice':'eurbidprice'}, axis={'columns'})
         
         with open('../creds/pg_creds.json') as json_data:
             d = json.load(json_data)
