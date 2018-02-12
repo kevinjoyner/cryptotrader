@@ -12,7 +12,7 @@ DB = CLIENT.cryptotracker
 class MongoQueries:
     """ For retreiving previously logged data """
 
-    def hourly_prices_per_symbol_df(self, query=None, pivot=True):
+    def hourly_prices_per_symbol_df(self, query=None, pivot=False):
         """ Returns pandas dataframe of EUR prices with column for each symbol indexed by
             hourly datetime timestamps"""
 
