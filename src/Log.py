@@ -57,13 +57,12 @@ class PostgresLogging:
         password = d[0]['password']
         
         engine = create_engine('postgresql://' + user + ':' + password + '@localhost:5432/cryptotracker')
-        engine.execute('TRUNCATE eur_prices RESTART IDENTITY;')
-        input_df.to_sql('eur_prices', engine, if_exists='append', index=False)
+        input_df.to_sql('eur_prices', engine, schema="public", if_exists='append', index=False)
 
         return
 
 
-    def prices_pivot(self, prices_df):
+    def prices_pivot(self, prices_df, if_exists='append'):
         """ Adds the Prices Pivot dataframe to Postgresql database """
 
         prices_df['date_hour'] = prices_df.index
@@ -79,7 +78,6 @@ class PostgresLogging:
         password = d[0]['password']
         
         engine = create_engine('postgresql://' + user + ':' + password + '@localhost:5432/cryptotracker')
-        engine.execute('TRUNCATE eur_prices RESTART IDENTITY;')
-        prices_df.to_sql('eur_prices', engine, if_exists='append', index=False)
+        prices_df.to_sql('eur_prices', engine, schema="public", if_exists=if_exists, index=False)
 
         return

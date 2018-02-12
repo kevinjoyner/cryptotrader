@@ -21,5 +21,8 @@ LogPrices().eur_bid_prices(ETHBINANCESYMBOLS)
 PostgresLogging().hourly_prices(ETHBINANCESYMBOLS)
 
 # PRICESDF = MongoQueries().hourly_prices_per_symbol_df()
+
+# Set argument if_exists to 'replace' for replacing the pg db
 # PostgresLogging().prices_pivot(PRICESDF)
+
 # STATSREPORT = Reports().stats_report(DATEHOUR, PRICESDF)
