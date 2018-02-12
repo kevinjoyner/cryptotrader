@@ -18,6 +18,7 @@ ETHEURSELLPRICE = EurSellPrices().fetch_etheur(DATEHOUR)
 ETHBINANCESYMBOLS = EthBidPrices().fetch_eth(ETHEURSELLPRICE)
 
 LogPrices().eur_bid_prices(ETHBINANCESYMBOLS)
+PostgresLogging().hourly_prices(ETHBINANCESYMBOLS)
 
 # PRICESDF = MongoQueries().hourly_prices_per_symbol_df()
 # PostgresLogging().prices_pivot(PRICESDF)

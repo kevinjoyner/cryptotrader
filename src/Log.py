@@ -3,6 +3,7 @@
 """ For logging data to MongoDB """
 
 from pymongo import MongoClient
+import pandas as pd
 import json
 from sqlalchemy import create_engine
 
@@ -28,6 +29,37 @@ class LogPrices:
 class PostgresLogging:
     """ For adding dataframes to the Postgres table """
     
+    def hourly_prices(self, eth_binance_symbols):
+        """ Logs EUR bid prices to postgres """
+        
+        date_hour = []
+        symbol = []
+        eurbidprice = []
+        dict_for_df = {
+            'date_hour': date_hour,
+            'symbol': symbol,
+            'eurbidprice': eurbidprice
+        }
+        for item in eth_binance_symbols:
+            dict_for_df['date_hour'].append(item["EthEurTime"])
+            dict_for_df['symbol'].append(item["symbol"][:-3])
+            dict_for_df['eurbidprice'].append(item["EURbidPrice"])
+        input_df = pd.dataframe(dict_for_df)
+        
+        with open('../creds/pg_creds.json') as json_data:
+            d = json.load(json_data)
+            json_data.close()
+
+        user = d[0]['user']
+        password = d[0]['password']
+        
+        engine = create_engine('postgresql://' + user + ':' + password + '@localhost:5432/cryptotracker')
+        engine.execute('TRUNCATE eur_prices RESTART IDENTITY;')
+        input_df.to_sql('eur_prices', engine, if_exists='append', index=False)
+
+        return
+
+
     def prices_pivot(self, prices_df):
         """ Adds the Prices Pivot dataframe to Postgresql database """
 
