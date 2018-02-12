@@ -3,6 +3,7 @@
 """ For logging data to MongoDB """
 
 from pymongo import MongoClient
+import datetime
 import pandas as pd
 import json
 from sqlalchemy import create_engine
@@ -41,10 +42,12 @@ class PostgresLogging:
             'eurbidprice': eurbidprice
         }
         for item in eth_binance_symbols:
-            dict_for_df['date_hour'].append(item["EthEurTime"])
+            dict_for_df['date_hour'].append(
+                datetime.datetime.fromtimestamp(item["EthEurTime"]/1000000).strftime("%Y%m%d%H")
+            )
             dict_for_df['symbol'].append(item["symbol"][:-3])
             dict_for_df['eurbidprice'].append(item["EURbidPrice"])
-        input_df = pd.dataframe(dict_for_df)
+        input_df = pd.DataFrame(dict_for_df)
         
         with open('../creds/pg_creds.json') as json_data:
             d = json.load(json_data)
