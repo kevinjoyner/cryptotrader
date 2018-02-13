@@ -43,7 +43,7 @@ class PostgresLogging:
         }
         for item in eth_binance_symbols:
             dict_for_df['date_hour'].append(
-                datetime.datetime.fromtimestamp(item["EthEurTime"]/1000000).strftime("%Y%m%d%H")
+                datetime.datetime.fromtimestamp(item["EthEurTime"]/1000000).strftime("%Y-%m-%d %H:00:00")
             )
             dict_for_df['symbol'].append(item["symbol"][:-3])
             dict_for_df['eurbidprice'].append(item["EURbidPrice"])
@@ -66,7 +66,7 @@ class PostgresLogging:
         """ Adds the Prices Pivot dataframe to Postgresql database """
 
         prices_df['date_hour'] = prices_df.index
-        prices_df['date_hour'] = prices_df['date_hour'].dt.strftime('%Y%m%d%H')
+        prices_df['date_hour'] = prices_df['date_hour'].dt.strftime("%Y-%m-%d %H:00:00")
         prices_df['eurbidprice'] = prices_df['EURbidPrice']
         prices_df.drop(['EURbidPrice'], axis=1, inplace = True)
         
